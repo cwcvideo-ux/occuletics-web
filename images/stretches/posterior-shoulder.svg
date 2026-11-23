@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" role="img">
+<title>Posterior shoulder stretch</title>
+<rect width="200" height="260" fill="#101820"/>
+<rect x="9" y="9" width="182" height="242" fill="none" stroke="#F9EC12" stroke-width="3"/>
+<line x1="24" y1="234" x2="176" y2="234" stroke="#F9EC12" stroke-width="4"/>
+<path d="M66 44 h60 l6-14 h-72 z" fill="#F9EC12"/><rect x="91" y="34" width="10" height="5" fill="#00AEEF"/><circle cx="96" cy="68" r="13" fill="#F3EFE4"/><path d="M96 82 V140 M96 100 L154 92 M78 118 L142 100 M96 140 L78 222 M96 140 L122 222" fill="none" stroke="#F3EFE4" stroke-width="11" stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>

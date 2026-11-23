@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" role="img">
+<title>Standing quad stretch</title>
+<rect width="200" height="260" fill="#101820"/>
+<rect x="9" y="9" width="182" height="242" fill="none" stroke="#F9EC12" stroke-width="3"/>
+<line x1="24" y1="234" x2="176" y2="234" stroke="#F9EC12" stroke-width="4"/>
+<path d="M62 42 h60 l6-14 h-72 z" fill="#F9EC12"/><rect x="87" y="32" width="10" height="5" fill="#00AEEF"/><circle cx="92" cy="66" r="13" fill="#F3EFE4"/><path d="M92 80 V138 M92 100 L46 118 M92 112 L138 150 L118 118 M92 138 L86 222 M92 138 L118 176" fill="none" stroke="#F3EFE4" stroke-width="11" stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>
