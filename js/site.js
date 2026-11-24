@@ -18,9 +18,10 @@
     });
   }
 
-  if (cfg.payments) {
+  function bindPayments(root) {
+    if (!cfg.payments) return;
     var orderEmail = (cfg.contact && cfg.contact.email) || "occuletics@gmail.com";
-    document.querySelectorAll("[data-payment]").forEach(function (el) {
+    (root || document).querySelectorAll("[data-payment]").forEach(function (el) {
       var key = el.getAttribute("data-payment");
       var entry = cfg.payments[key];
       var url = typeof entry === "string" ? entry : (entry && entry.url);
@@ -35,6 +36,7 @@
       }
     });
   }
+  bindPayments(document);
 
   var socialList = document.querySelector(".social");
   if (socialList && cfg.social) {
@@ -69,6 +71,66 @@
     });
   }
 
+  var product = document.querySelector("[data-product]");
+  if (product && cfg.products) {
+    var slug = product.getAttribute("data-product");
+    var spec = cfg.products[slug];
+    if (spec) {
+      var params = new URLSearchParams(location.search);
+      var edition = params.get("edition") === "women" || location.hash === "#women" ? "women" : "standard";
+      var lang = spec.languages ? (params.get("lang") === "es" || location.hash === "#es" ? "es" : "en") : null;
+
+      function variantKey() {
+        return lang ? edition + "-" + lang : edition;
+      }
+
+      function applyVariant() {
+        var key = variantKey();
+        var img = product.querySelector("[data-poster]");
+        if (img && spec.images && spec.images[key]) {
+          img.src = spec.images[key];
+          if (spec.alts && spec.alts[key]) img.alt = spec.alts[key];
+        }
+        var title = spec.titles && spec.titles[key];
+        var sku = spec.skus && spec.skus[key];
+        var titleEl = product.querySelector("[data-title]");
+        if (titleEl && title) titleEl.textContent = title;
+        var skuEl = product.querySelector("[data-sku]");
+        if (skuEl && sku) skuEl.textContent = sku + " · 18×24";
+        var cap = product.querySelector("[data-caption]");
+        if (cap && title && sku) cap.textContent = title + " · " + sku;
+        var pays = spec.payments && spec.payments[key];
+        if (pays) {
+          product.querySelectorAll("[data-payment-slot]").forEach(function (el) {
+            var slot = el.getAttribute("data-payment-slot");
+            if (pays[slot]) el.setAttribute("data-payment", pays[slot]);
+          });
+          bindPayments(product);
+        }
+        product.querySelectorAll("[data-edition]").forEach(function (btn) {
+          btn.setAttribute("aria-pressed", btn.getAttribute("data-edition") === edition ? "true" : "false");
+        });
+        product.querySelectorAll("[data-lang]").forEach(function (btn) {
+          btn.setAttribute("aria-pressed", btn.getAttribute("data-lang") === lang ? "true" : "false");
+        });
+      }
+
+      product.querySelectorAll("[data-edition]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          edition = btn.getAttribute("data-edition") || "standard";
+          applyVariant();
+        });
+      });
+      product.querySelectorAll("[data-lang]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          lang = btn.getAttribute("data-lang") || "en";
+          applyVariant();
+        });
+      });
+      applyVariant();
+    }
+  }
+
   var check = document.querySelector(".nav-check");
   var toggle = document.querySelector(".nav-toggle");
   if (check && toggle) {
@@ -98,7 +160,8 @@
   function applyFilter(name) {
     var shown = 0;
     cards.forEach(function (card) {
-      var on = name === "all" || card.getAttribute("data-line") === name;
+      var line = card.getAttribute("data-line") || "";
+      var on = name === "all" || line === name || line.split(" ").indexOf(name) !== -1;
       card.hidden = !on;
       if (on) shown += 1;
     });
@@ -106,7 +169,8 @@
       btn.setAttribute("aria-pressed", btn.getAttribute("data-filter") === name ? "true" : "false");
     });
     if (count) {
-      var label = name === "all" ? "All lines" : name.charAt(0).toUpperCase() + name.slice(1);
+      var labels = { all: "All lines", core: "Core", industrial: "Industrial", office: "Office", retail: "Retail" };
+      var label = labels[name] || (name.charAt(0).toUpperCase() + name.slice(1));
       count.textContent = label + " · " + shown + (shown === 1 ? " title" : " titles");
     }
   }
@@ -122,7 +186,7 @@
       });
     });
     var hash = (location.hash || "").replace("#", "");
-    if (hash === "industrial" || hash === "office" || hash === "retail") applyFilter(hash);
+    if (hash === "industrial" || hash === "office" || hash === "retail" || hash === "core") applyFilter(hash);
     else applyFilter("all");
   }
 
