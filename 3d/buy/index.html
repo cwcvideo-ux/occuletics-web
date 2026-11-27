@@ -72,12 +72,16 @@
               <div><h2>This demo as video</h2><p>MP4 of the demo you picked, with step captions. Emailed within one business day. One workplace.</p></div>
               <div class="buy-action"><span class="price" data-price="video"></span><a class="btn" data-payment="demo-video" href="mailto:occuletics@gmail.com?subject=Order%3A%203D%20demo%20video">Order by email</a></div>
             </li>
+            <li id="opt-mimic">
+              <div><h2>Mimic My Move</h2><p>Your own movement on the 3D model. Up to 3 tries to refine it, then the finished MP4. After checkout, email us the mimic file you saved in the viewer. Sent within one business day.</p></div>
+              <div class="buy-action"><span class="price" data-price="mimic"></span><a class="btn" data-payment="mimic-video" href="mailto:occuletics@gmail.com?subject=Order%3A%20Mimic%20My%20Move%20video">Order by email</a></div>
+            </li>
             <li id="opt-unlimited">
               <div><h2>Unlimited exports</h2><p>Every demo, as video and still images, for your workplace. Details are confirmed with your order.</p></div>
               <div class="buy-action"><span class="price" data-price="unlimited"></span><a class="btn" data-payment="demo-unlimited" href="mailto:occuletics@gmail.com?subject=Order%3A%203D%20demo%20unlimited%20exports">Order by email</a></div>
             </li>
           </ul>
-          <p class="fine">Checkout opens on Square. Teaching animations for workplace wellness education, not medical advice. Need your logo or a custom movement? <a href="/contact/?interest=Custom+3D+demo">Ask for a quote.</a></p>
+          <p class="fine">Mimic files hold joint angles only, never your video. Checkout opens on Square. Teaching animations for workplace wellness education, not medical advice. Need your logo or a custom movement? <a href="/contact/?interest=Custom+3D+demo">Ask for a quote.</a></p>
         </div>
       </div>
     </div>
@@ -120,6 +124,7 @@
     var q = new URLSearchParams(location.search), slug = (q.get("demo") || "").replace(/[^a-z0-9-]/g, ""), opt = q.get("option");
     var cfg = window.OCCULETICS || {}, P = cfg.prices3d || {};
     document.querySelectorAll("[data-price]").forEach(function (el) { var v = P[el.getAttribute("data-price")]; if (v) el.textContent = v; else el.remove(); });
+    if (opt === "mimic" && !slug) { document.getElementById("demoTitle").textContent = "Mimic My Move"; document.getElementById("demoCap").textContent = "Your movement · 3D demo"; }
     if (slug) {
       var name = slug.replace(/-/g, " "); name = name.charAt(0).toUpperCase() + name.slice(1);
       document.getElementById("demoTitle").textContent = name;
@@ -128,7 +133,7 @@
       document.getElementById("demoOpen").href = "https://anatomotion3d.com/?demo=" + slug;
       document.querySelectorAll('a[data-payment^="demo-"]').forEach(function (a) { if (a.href.indexOf("mailto:") === 0) a.href += encodeURIComponent(" — " + name); });
     }
-    var li = document.getElementById(opt === "unlimited" ? "opt-unlimited" : opt === "video" ? "opt-video" : "");
+    var li = document.getElementById(opt === "unlimited" ? "opt-unlimited" : opt === "video" ? "opt-video" : opt === "mimic" ? "opt-mimic" : "");
     if (li) li.classList.add("pick");
   })();
   </script>

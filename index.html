@@ -120,9 +120,10 @@
         </div>
         <div class="hero-actions" style="margin-top:1rem">
           <a class="btn btn-ghost" href="/3d/">Browse all 44 demos</a>
+          <button class="btn" type="button" id="viewer3dMimic">Mimic My Move · upload your video</button>
           <a class="btn btn-ghost" href="/3d/buy/">Buy a demo video</a>
         </div>
-        <p class="fine" style="margin-top:.6rem">Viewing is free. Video and image export is a paid download.</p>
+        <p class="fine" style="margin-top:.6rem">Viewing is free. Video and image export is a paid download. Mimic My Move puts your own movement on the model: $25 with the finished video.</p>
         <style>
           .viewer3d{position:relative;height:min(680px,82vh);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#04070c}
           .viewer3d iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -133,12 +134,14 @@
           .viewer3d-start:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px}
         </style>
         <script>
-          document.getElementById("viewer3dStart").addEventListener("click", function () {
+          function open3d(q) {
             var f = document.createElement("iframe");
-            f.src = "https://anatomotion3d.com/?gate=occuletics&demo=lifting-from-the-floor";
+            f.src = "https://anatomotion3d.com/?gate=occuletics&" + q;
             f.title = "Occuletics 3D anatomy viewer"; f.allow = "fullscreen";
             var box = document.getElementById("viewer3d"); box.innerHTML = ""; box.appendChild(f); f.focus();
-          });
+          }
+          document.getElementById("viewer3dStart").addEventListener("click", function () { open3d("demo=lifting-from-the-floor"); });
+          document.getElementById("viewer3dMimic").addEventListener("click", function () { open3d("tab=mimic"); document.getElementById("viewer3d").scrollIntoView({ block: "center" }); });
         </script>
       </div>
     </section>
