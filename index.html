@@ -107,25 +107,39 @@
     </section>
     <section>
       <div class="wrap">
-        <div class="see3d">
-          <div>
-            <p class="kicker">New · interactive</p>
-            <h2>See it in 3D.</h2>
-            <p class="lede">Real anatomy, moving. Watch the low back load up in a stooped lift and drop in a squat. Turn the body, tap a muscle, and walk through 26 exercises and the injuries they prevent.</p>
-            <p style="margin-top:1.2rem"><a class="btn" href="/3d/">Open the 3D demos</a></p>
-          </div>
-          <a class="see3d-pics" href="/3d/" aria-label="Open the 3D demos">
-            <img src="https://anatomotion3d.com/library/thumbs/lifting-from-the-floor.jpg" width="640" height="480" alt="3D model lifting a box from the floor with the back muscles highlighted." loading="lazy">
-            <img src="https://anatomotion3d.com/library/thumbs/mini-squat.jpg" width="640" height="480" alt="3D model doing a mini squat." loading="lazy">
-          </a>
+        <div class="section-head">
+          <p class="kicker">New · interactive</p>
+          <h2>See it in 3D.</h2>
+          <p class="lede">Real anatomy, moving. Pick a lift, an exercise, or an injury. Turn the body, tap any muscle, and watch the low-back load change with the technique.</p>
         </div>
+        <div class="viewer3d" id="viewer3d">
+          <button class="viewer3d-start" type="button" id="viewer3dStart">
+            <img src="https://anatomotion3d.com/library/thumbs/lifting-from-the-floor.jpg" width="640" height="480" alt="">
+            <span class="viewer3d-cta"><span class="btn">Start the 3D viewer</span><span class="viewer3d-note">Loads about 7 MB</span></span>
+          </button>
+        </div>
+        <div class="hero-actions" style="margin-top:1rem">
+          <a class="btn btn-ghost" href="/3d/">Browse all 44 demos</a>
+          <a class="btn btn-ghost" href="/3d/buy/">Buy a demo video</a>
+        </div>
+        <p class="fine" style="margin-top:.6rem">Viewing is free. Video and image export is a paid download.</p>
         <style>
-          .see3d{display:grid;gap:1.6rem;align-items:center;background:var(--plate);border:1px solid var(--line);border-radius:16px;padding:clamp(1.2rem,3vw,2.2rem)}
-          .see3d-pics{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-          .see3d-pics img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#04070c;display:block}
-          .see3d h2{font-size:clamp(2.1rem,4.2vw,3.2rem);line-height:.95;margin:.2rem 0 .6rem}
-          @media (min-width:860px){.see3d{grid-template-columns:1fr 1.1fr}}
+          .viewer3d{position:relative;height:min(680px,82vh);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#04070c}
+          .viewer3d iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+          .viewer3d-start{position:absolute;inset:0;width:100%;padding:0;border:0;background:#04070c;cursor:pointer}
+          .viewer3d-start img{width:100%;height:100%;object-fit:cover;opacity:.75;display:block}
+          .viewer3d-cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem}
+          .viewer3d-note{color:var(--muted);font-size:.9rem}
+          .viewer3d-start:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px}
         </style>
+        <script>
+          document.getElementById("viewer3dStart").addEventListener("click", function () {
+            var f = document.createElement("iframe");
+            f.src = "https://anatomotion3d.com/?gate=occuletics&demo=lifting-from-the-floor";
+            f.title = "Occuletics 3D anatomy viewer"; f.allow = "fullscreen";
+            var box = document.getElementById("viewer3d"); box.innerHTML = ""; box.appendChild(f); f.focus();
+          });
+        </script>
       </div>
     </section>
     <section>

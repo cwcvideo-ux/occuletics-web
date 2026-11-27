@@ -166,10 +166,23 @@ window.OCCULETICS = {
       }
     }
   },
+  /* 3D demo prices shown on /3d/buy/. Type a price like "$15".
+     Leave "" to hide the price until it is set. */
+  prices3d: { video: "", unlimited: "" },
   /* Paste a real Square Payment Link over each url.
      Until that url no longer contains REPLACE_ME, the button
      emails occuletics@gmail.com with the subject below. */
   payments: {
+    "demo-video": {
+      url: "https://square.link/u/REPLACE_ME",
+      subject: "Order: 3D demo video",
+      label: "Buy video"
+    },
+    "demo-unlimited": {
+      url: "https://square.link/u/REPLACE_ME",
+      subject: "Order: 3D demo unlimited exports",
+      label: "Buy unlimited"
+    },
     "pre-shift-pdf": {
       url: "https://square.link/u/REPLACE_ME",
       subject: "Order: Pre-Shift Warm-Up digital PDF",
