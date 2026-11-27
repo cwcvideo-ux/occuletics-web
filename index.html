@@ -107,6 +107,29 @@
     </section>
     <section>
       <div class="wrap">
+        <div class="see3d">
+          <div>
+            <p class="kicker">New · interactive</p>
+            <h2>See it in 3D.</h2>
+            <p class="lede">Real anatomy, moving. Watch the low back load up in a stooped lift and drop in a squat. Turn the body, tap a muscle, and walk through 26 exercises and the injuries they prevent.</p>
+            <p style="margin-top:1.2rem"><a class="btn" href="/3d/">Open the 3D demos</a></p>
+          </div>
+          <a class="see3d-pics" href="/3d/" aria-label="Open the 3D demos">
+            <img src="https://anatomotion3d.com/library/thumbs/lifting-from-the-floor.jpg" width="640" height="480" alt="3D model lifting a box from the floor with the back muscles highlighted." loading="lazy">
+            <img src="https://anatomotion3d.com/library/thumbs/mini-squat.jpg" width="640" height="480" alt="3D model doing a mini squat." loading="lazy">
+          </a>
+        </div>
+        <style>
+          .see3d{display:grid;gap:1.6rem;align-items:center;background:var(--plate);border:1px solid var(--line);border-radius:16px;padding:clamp(1.2rem,3vw,2.2rem)}
+          .see3d-pics{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+          .see3d-pics img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#04070c;display:block}
+          .see3d h2{font-size:clamp(2.1rem,4.2vw,3.2rem);line-height:.95;margin:.2rem 0 .6rem}
+          @media (min-width:860px){.see3d{grid-template-columns:1fr 1.1fr}}
+        </style>
+      </div>
+    </section>
+    <section>
+      <div class="wrap">
         <div class="section-head">
           <p class="kicker">Three lines</p>
           <h2>Industrial. Office. Retail.</h2>
